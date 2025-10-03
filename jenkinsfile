@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    environment{
+    environment {
         NETLIFY_SITE_ID = 'ad256014-8267-43c0-8d80-2ebe4ac93391'
-        NETLIFY_AUTH__TOKEN = credentials('netlify-token')
+        NETLIFY_AUTH_TOKEN = credentials('netlify-token')
     }
 
     stages {
@@ -45,7 +45,7 @@ pipeline {
                     }
                     post {
                         always {
-                            junit 'test-results/junit.xml'
+                            junit 'jest-results/junit.xml'
                         }
                     }
                 }
