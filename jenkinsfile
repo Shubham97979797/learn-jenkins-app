@@ -28,8 +28,6 @@ pipeline {
                 '''
             }
         }
-        
-        stages {
 
         stage('AWS') {
             agent {
