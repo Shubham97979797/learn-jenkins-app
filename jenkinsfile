@@ -2,13 +2,12 @@ pipeline {
     agent any
 
     environment {
-        NETLIFY_SITE_ID = 'ad256014-8267-43c0-8d80-2ebe4ac93391'
+        NETLIFY_SITE_ID = 'YOUR NETLIFY SITE ID'
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
         REACT_APP_VERSION = "1.0.$BUILD_ID"
     }
 
-            }
-        }
+    stages {
 
         stage('Build') {
             agent {
@@ -42,11 +41,11 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'my-aws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
-                   sh '''
-                       aws --version
-                       aws s3 sync build s3://$AWS_S3_BUCKET
+                    sh '''
+                        aws --version
+                        aws s3 sync build s3://$AWS_S3_BUCKET
                     '''
-}
+                }
             }
         }
 
@@ -68,7 +67,7 @@ pipeline {
                     }
                     post {
                         always {
-                            junit 'test-results/junit.xml'
+                            junit 'jest-results/junit.xml'
                         }
                     }
                 }
